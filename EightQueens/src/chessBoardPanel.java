@@ -91,24 +91,23 @@ public class chessBoardPanel {
 		Queen queen;
 		for (int i = 0; i < queenSquares.length; i++) {
 			/////////////////////////////////////////////////////////////////////////////
-			/*
-			 * if(queenList.size()==8){ return true; }
-			 */
-
+			
 			queen = new Queen(i, queenList.size());
-
+			System.out.println("checking: " + queen.getRow() + ", " + queen.getCol());
+			
 			if (isLegal(queen.getRow(), queen.getCol())) {
 				queenList.add(queen);
 				if (queenList.size() == 8) {
 					return true;
 				}
-
-				setBoard(queenList);
-				if (!(addQueen(queenList))) {
-					queenList.remove(queenList.size());
+				if(!addQueen(queenList)) {
+					return true;
 				}
-				toString(queenList);
+				ArrayList<Queen> queenCopy = (ArrayList<Queen>) queenList.clone();
+				setBoard(queenCopy);
 
+				toString(queenList);
+				addQueen(queenCopy);
 			}
 		}
 
