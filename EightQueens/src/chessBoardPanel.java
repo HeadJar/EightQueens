@@ -89,25 +89,29 @@ public class chessBoardPanel {
 			return true;
 		}
 		Queen queen;
-		for (int i = 0; i < queenSquares.length; i++) {
+		for (int row = 0; row < queenSquares[0].length; row++) {
 			/////////////////////////////////////////////////////////////////////////////
-			
-			queen = new Queen(i, queenList.size());
+
+			queen = new Queen(row, queenList.size());
 			System.out.println("checking: " + queen.getRow() + ", " + queen.getCol());
-			
+
 			if (isLegal(queen.getRow(), queen.getCol())) {
 				queenList.add(queen);
 				if (queenList.size() == 8) {
 					return true;
 				}
-				if(!addQueen(queenList)) {
-					return true;
+
+				setBoard(queenList);
+				if (!addQueen(queenList)) {
+					System.out.println(addQueen(queenList));
+					Queen tempQueen = queenList.remove(queenList.size() - 1);
+					System.out.println("The removed queen is" + tempQueen.getRow() + ", " + tempQueen.getCol());
+					row = tempQueen.getRow() + 1;
+
 				}
-				ArrayList<Queen> queenCopy = (ArrayList<Queen>) queenList.clone();
-				setBoard(queenCopy);
 
 				toString(queenList);
-				addQueen(queenCopy);
+
 			}
 		}
 
@@ -139,10 +143,6 @@ public class chessBoardPanel {
 	public boolean checkDiagonal(int row, int col) {
 		int r = row;
 		int c = col;
-
-		if (r == 1 && c == 2) {
-			System.out.println("Stop");
-		}
 
 		while (r >= 0 && c < COLS) {
 
