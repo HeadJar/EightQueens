@@ -111,7 +111,7 @@ public class chessBoardPanel {
 				}
 
 				toString(queenList);
-
+				addQueen(queenList);
 			}
 		}
 
