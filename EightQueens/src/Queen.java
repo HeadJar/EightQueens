@@ -25,7 +25,10 @@ public void setCol(int col) {
 	this.col = col;
 }
 
-
+public String toString() {
+	
+	return ("The queen has row" + this.row + " and col" + this.col);
+}
 
 
 
