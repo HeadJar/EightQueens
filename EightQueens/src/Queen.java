@@ -1,5 +1,9 @@
 import java.util.ArrayList;
-
+/**
+ * Queen Placeholder class
+ * @author Jarhead
+ *This has a row and column to know where a queen is
+ */
 public class Queen {
 int row;
 int col;
