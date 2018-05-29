@@ -24,7 +24,7 @@ public class chessBoardPanel {
 	// chessSpacePanel[][] squares = new chessSpacePanel[ROWS][COLS];
 	boolean[][] queenSquares = new boolean[ROWS][COLS];
 	ArrayList<Queen> queenList = new ArrayList<Queen>();
-
+ArrayList<ArrayList<Queen>> solutions = new ArrayList<ArrayList<Queen>>();
 	chessBoardPanel() {
 		/*
 		 * buildFrame(); panelOne = buildHeaderPanel(); panelTwo = buildGridPanels();
@@ -91,27 +91,42 @@ public class chessBoardPanel {
 		Queen queen;
 		for (int row = 0; row < queenSquares[0].length; row++) {
 			/////////////////////////////////////////////////////////////////////////////
-
+			
+			if(queenList.size() == 8) {
+				return true;
+			}
 			queen = new Queen(row, queenList.size());
-			System.out.println("checking: " + queen.getRow() + ", " + queen.getCol());
-
 			if (isLegal(queen.getRow(), queen.getCol())) {
 				queenList.add(queen);
-				if (queenList.size() == 8) {
-					return true;
-				}
-
 				setBoard(queenList);
 				if (!addQueen(queenList)) {
-					System.out.println(addQueen(queenList));
-					Queen tempQueen = queenList.remove(queenList.size() - 1);
-					System.out.println("The removed queen is" + tempQueen.getRow() + ", " + tempQueen.getCol());
-					row = tempQueen.getRow() + 1;
-
+					queen = queenList.remove(queenList.size() - 1);
+					queenSquares[queen.getRow()][queen.getCol()]  = false;
+					System.out.println("The removed queen is: " + queen.toString());
+					row = queen.getRow();
+					
+				}	
+		/*
+				if(queenList.size() == 8) {
+				
+					solutions.add((ArrayList<Queen>)queenList.clone());
+				queen = queenList.remove(queenList.size() - 1);
+					row = queen.getRow();
+				    System.out.println("Found Solution, removing and continuing: " + queen.getRow() + ", " + queen.getCol());
+				
 				}
-
-				toString(queenList);
-				addQueen(queenList);
+			*/
+				//toString(queenList);
+				//System.out.println("A solution is " + solutions.get(0));
+			
+			}else {
+				if(queenList.size()== 8) {
+				solutions.add((ArrayList<Queen>)queenList.clone());
+                queen = queenList.remove(queenList.size() -1);
+                System.out.println("The queen is " + queen.toString());
+                row = queen.getRow();
+                System.out.println("Found Solution, removing and continuing: " + queen.getRow() + ", " + queen.getCol());
+				}
 			}
 		}
 

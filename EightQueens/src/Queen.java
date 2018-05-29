@@ -27,7 +27,7 @@ public void setCol(int col) {
 
 public String toString() {
 	
-	return ("The queen has row" + this.row + " and col" + this.col);
+	return ("The queen has row " + this.row + " and col " + this.col);
 }
 
 
